@@ -78,6 +78,7 @@ mariadb:
 #
 ingress:
   enabled: true
+  ingressClassName: "nginx"
   labels: {}
   hosts:
     - ""

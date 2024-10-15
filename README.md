@@ -93,51 +93,52 @@ Lastly, set up the username and password for basic authentication.
 
 ## Values
 
-Key | Description | Default
---: | :--: | :--
-`image.repository` | ocsinventory Image | `ocsinventory/ocsinventory-docker-image`
-`image.pullPolicy` | Image pull policy | `IfNotPresent`
-`image.tag` | Image version | `2.12.1`
-`replicaCount` | Number of ocs pod to deployed | `1`
-`phpconfig.ocsinventory.ini` | Additional php.ini configuration | `config`
-`persistense.enabled` | Enable persistence using PVC | `true`
-`persistense.size` | PVC Storage Request for OCS volume | `10Gi`
-`persistense.accessMode` | PVC Access Mode for OCS volume | `ReadWriteOnce`
-`persistense.storageClass` | PVC Storage Class for OCS volume | `""`
-`persistense.existingClaim` | An Existing PVC name for OCS volume | `""`
-`externalDatabase.enalbed` | Whether to use external database | `false`
-`externalDatabase.hostname` | Host of the external database | `""`
-`externalDatabase.username` | Username of the external database | `""`
-`externalDatabase.password` | Password for the user of the external database | `""`
-`externalDatabase.database` | Name of the external databse | `""`
-`database.create` | Wether to create a OCS database | `false`
-`database.db_name` | Database name to create | `""`
-`database.db_user` | Database user to create | `""`
-`database.db_pass` | Password for the database | `""`
-`database.db_server` | Name of the database service | `""`
-`mariadb.enabled` | Whether to create a MariaDB server | `true`
-`mariadb.auth.rootPasswd` | MariaDB admin password | `""`
-`mariadb.auth.database` | Database name to create | `""`
-`mariadb.auth.username` | Database user to create | `""`
-`mariadb.auth.password` | Password for the user | `""`
-`ingress.enabled` | Enable use of ingress controllers | `true`
-`ingress.tls` | Use dedicated certificates | `true`
-`ingress.hosts` | OCS hosts to create application URLs | `""`
-`ingress.annotations` | An array of ingress annotations | `{}`
-`ingress.basicauth.enabled`  | Wether to enable basic auth | `"false"`
-`ingress.basicauth.username`  | Username for basic auth | `""`
-`ingress.basicauth.password`  | Password for basic auth | `""`
-`ingress.basicauth.authRealm` | Basic auth directive | `Authentication Required`
-`ingress.basicauth.paths` | Paths with basic auth | `/ocsapi` `/ocsinventory`
-`resources` | CPU/Memory resource requests/limits for OCS pod | `{}`
-`metrics.enabled` | Enable metrics| `false`
-`metrics.image.repository` | apache-exporter Image | `docker.io/bitnami/apache-exporter`
-`metrics.image.tag` | Metrics image version | `1.0.3-debian-11-r2`
-`metrics.image.pullPolicy` | Metrics image pull policy | `IfNotPresent`
-`metrics.serviceMonitor.enabled` | Create ServiceMonitor object | `false`
-`metrics.serviceMonitor.label.prometheus` | Prometheus label used for scrapping | `prometheus`
-`metrics.serviceMonitor.label.release` | Release label used for scrapping (should be the prometheus instance name)| `tobedefined`
-`metrics.resources` | CPU/Memory resource requests/limits for apache metrics pod | `{}`
+Key |                               Description                                | Default
+--: |:------------------------------------------------------------------------:| :--
+`image.repository` |                            ocsinventory Image                            | `ocsinventory/ocsinventory-docker-image`
+`image.pullPolicy` |                            Image pull policy                             | `IfNotPresent`
+`image.tag` |                              Image version                               | `2.12.1`
+`replicaCount` |                      Number of ocs pod to deployed                       | `1`
+`phpconfig.ocsinventory.ini` |                     Additional php.ini configuration                     | `config`
+`persistense.enabled` |                       Enable persistence using PVC                       | `true`
+`persistense.size` |                    PVC Storage Request for OCS volume                    | `10Gi`
+`persistense.accessMode` |                      PVC Access Mode for OCS volume                      | `ReadWriteOnce`
+`persistense.storageClass` |                     PVC Storage Class for OCS volume                     | `""`
+`persistense.existingClaim` |                   An Existing PVC name for OCS volume                    | `""`
+`externalDatabase.enalbed` |                     Whether to use external database                     | `false`
+`externalDatabase.hostname` |                      Host of the external database                       | `""`
+`externalDatabase.username` |                    Username of the external database                     | `""`
+`externalDatabase.password` |              Password for the user of the external database              | `""`
+`externalDatabase.database` |                       Name of the external databse                       | `""`
+`database.create` |                     Wether to create a OCS database                      | `false`
+`database.db_name` |                         Database name to create                          | `""`
+`database.db_user` |                         Database user to create                          | `""`
+`database.db_pass` |                        Password for the database                         | `""`
+`database.db_server` |                       Name of the database service                       | `""`
+`mariadb.enabled` |                    Whether to create a MariaDB server                    | `true`
+`mariadb.auth.rootPasswd` |                          MariaDB admin password                          | `""`
+`mariadb.auth.database` |                         Database name to create                          | `""`
+`mariadb.auth.username` |                         Database user to create                          | `""`
+`mariadb.auth.password` |                          Password for the user                           | `""`
+`ingress.enabled` |                    Enable use of ingress controllers                     | `true`
+`ingress.tls` |                        Use dedicated certificates                        | `true`
+`ingress.ingressClassName` |                    Ingress Class Name for k8s >= v1.18                   | `"nginx"`
+`ingress.hosts` |                   OCS hosts to create application URLs                   | `""`
+`ingress.annotations` |                     An array of ingress annotations                      | `{}`
+`ingress.basicauth.enabled`  |                       Wether to enable basic auth                        | `"false"`
+`ingress.basicauth.username`  |                         Username for basic auth                          | `""`
+`ingress.basicauth.password`  |                         Password for basic auth                          | `""`
+`ingress.basicauth.authRealm` |                           Basic auth directive                           | `Authentication Required`
+`ingress.basicauth.paths` |                          Paths with basic auth                           | `/ocsapi` `/ocsinventory`
+`resources` |             CPU/Memory resource requests/limits for OCS pod              | `{}`
+`metrics.enabled` |                              Enable metrics                              | `false`
+`metrics.image.repository` |                          apache-exporter Image                           | `docker.io/bitnami/apache-exporter`
+`metrics.image.tag` |                          Metrics image version                           | `1.0.3-debian-11-r2`
+`metrics.image.pullPolicy` |                        Metrics image pull policy                         | `IfNotPresent`
+`metrics.serviceMonitor.enabled` |                       Create ServiceMonitor object                       | `false`
+`metrics.serviceMonitor.label.prometheus` |                   Prometheus label used for scrapping                    | `prometheus`
+`metrics.serviceMonitor.label.release` |Release label used for scrapping (should be the prometheus instance name) | `tobedefined`
+`metrics.resources` |        CPU/Memory resource requests/limits for apache metrics pod        | `{}`
 
 
 
