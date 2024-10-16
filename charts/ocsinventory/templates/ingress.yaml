@@ -12,7 +12,7 @@ metadata:
 spec:
   {{- if semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion }}
   ingressClassName: {{ .Values.ingress.ingressClassName }}
-  {{- else }}
+  {{- end }}
   tls:
     - hosts:
       {{- range .Values.ingress.hosts }}
@@ -54,7 +54,7 @@ metadata:
 spec:
   {{- if semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion }}
   ingressClassName: {{ .Values.ingress.ingressClassName }}
-  {{- else }}
+  {{- end }}
   tls:
     - hosts:
       {{- range .Values.ingress.hosts }}
