@@ -6,11 +6,17 @@ metadata:
   labels:
     {{- include "ocsinventory.labels" . | nindent 4 }}
   annotations:
-  {{- with .Values.ingress.annotations }}
-    {{- toYaml . | nindent 4 }}
+{{- with .Values.ingress.annotations }}
+{{- range $key, $value := . }}
+  {{- if and (eq $key "kubernetes.io/ingress.class") (semverCompare "<1.18.0" $.Capabilities.KubeVersion.Version) }}
+    {{ $key }}: {{ $value | quote }}
+  {{- else if ne $key "kubernetes.io/ingress.class" }}
+    {{ $key }}: {{ $value | quote }}
   {{- end }}
+{{- end }}
+{{- end }}
 spec:
-  {{- if semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion }}
+  {{- if and (semverCompare ">=1.18.0" .Capabilities.KubeVersion.Version) (hasKey .Values.ingress "ingressClassName") (not (empty .Values.ingress.ingressClassName)) }}
   ingressClassName: {{ .Values.ingress.ingressClassName }}
   {{- end }}
   tls:
@@ -45,14 +51,20 @@ metadata:
   labels:
     {{- include "ocsinventory.labels" . | nindent 4 }}
   annotations:
-  {{- with .Values.ingress.annotations }}
-    {{- toYaml . | nindent 4 }}
+{{- with .Values.ingress.annotations }}
+{{- range $key, $value := . }}
+  {{- if and (eq $key "kubernetes.io/ingress.class") (semverCompare "<1.18.0" $.Capabilities.KubeVersion.Version) }}
+    {{ $key }}: {{ $value | quote }}
+  {{- else if ne $key "kubernetes.io/ingress.class" }}
+    {{ $key }}: {{ $value | quote }}
   {{- end }}
+{{- end }}
+{{- end }}
     nginx.ingress.kubernetes.io/auth-type: basic
     nginx.ingress.kubernetes.io/auth-secret: {{ template "ocsinventory.fullname" . }}
     nginx.ingress.kubernetes.io/auth-realm: {{ .Values.ingress.basicauth.authRealm | quote }}
 spec:
-  {{- if semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion }}
+  {{- if and (semverCompare ">=1.18.0" .Capabilities.KubeVersion.Version) (hasKey .Values.ingress "ingressClassName") (not (empty .Values.ingress.ingressClassName)) }}
   ingressClassName: {{ .Values.ingress.ingressClassName }}
   {{- end }}
   tls:
